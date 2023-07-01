@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400&family=Montserrat:wght@300;500;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply flex flex-col justify-center items-center bg-gray-900 text-white;
+  font-family: "Hind", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Montserrat", sans-serif;
+}
+
+.carousel-card {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: 0.1s ease-in-out;
+}
+
+.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: visible;
+}
