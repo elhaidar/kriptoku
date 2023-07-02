@@ -6,16 +6,19 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { CryptoContext } from "./context/Context";
+import { useNavigate } from "react-router-dom";
 
 const TrendingCard = ({ data, classname }) => {
   const { currency } = useContext(CryptoContext);
   const formatter = Intl.NumberFormat("en", { notation: "compact" });
+  const navigate = useNavigate();
   return (
     <div
       className={
         "p-2 carousel-card w-1/3 cursor-pointer hover:bg-gray-800 rounded-xl" +
         classname
       }
+      onClick={() => navigate(`/coin/${data?.id}`)}
     >
       <p className="text-sm text-gray-500">{data?.name}</p>
       <div className="flex items-center py-1">

@@ -16,7 +16,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="w-full px-4 pt-4">
+    <header className="w-full px-8 pt-4">
       <ul className="flex justify-between items-center border-b-[1px] border-gray-700 pb-4">
         {location.pathname === "/" ? (
           <li className="text-teal-600 font-heading font-bold text-lg cursor-default">
