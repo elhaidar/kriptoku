@@ -74,7 +74,15 @@ const CoinDetails = () => {
                 />
               </span>{" "}
               {currency === "usd" ? "$" : "Rp. "}
-              {formatter.format(coinData?.market_data?.current_price[currency])}
+              {Number(
+                coinData?.market_data?.current_price[currency].toFixed(20)
+              ) > 1
+                ? formatter.format(
+                    coinData?.market_data?.current_price[currency]
+                  )
+                : parseFloat(
+                    coinData?.market_data?.current_price[currency].toFixed(10)
+                  )}
             </p>
             <p className="text-xs opacity-80">
               {Math.round(priceChange * 1e2) / 1e2}%
