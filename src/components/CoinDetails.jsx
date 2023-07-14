@@ -17,6 +17,21 @@ const CoinDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [priceChange, setPriceChange] = useState(0);
 
+  const priceChangePercentage = (days, coinData) => {
+    days === 1 &&
+      setPriceChange(coinData?.market_data?.price_change_percentage_24h);
+    days === 7 &&
+      setPriceChange(coinData?.market_data?.price_change_percentage_7d);
+    days === 14 &&
+      setPriceChange(coinData?.market_data?.price_change_percentage_14d);
+    days === 30 &&
+      setPriceChange(coinData?.market_data?.price_change_percentage_30d);
+    days === 60 &&
+      setPriceChange(coinData?.market_data?.price_change_percentage_60d);
+    days === 365 &&
+      setPriceChange(coinData?.market_data?.price_change_percentage_1y);
+  };
+
   useEffect(() => {
     setIsLoading(true);
     fetchSingleCoin(id, (status, data) => {
@@ -30,18 +45,7 @@ const CoinDetails = () => {
   }, [id, setFetchError]);
 
   useEffect(() => {
-    days === 1 &&
-      setPriceChange(coinData?.market_data?.price_change_percentage_24h);
-    days === 7 &&
-      setPriceChange(coinData?.market_data?.price_change_percentage_7d);
-    days === 14 &&
-      setPriceChange(coinData?.market_data?.price_change_percentage_14d);
-    days === 30 &&
-      setPriceChange(coinData?.market_data?.price_change_percentage_30d);
-    days === 60 &&
-      setPriceChange(coinData?.market_data?.price_change_percentage_60d);
-    days === 365 &&
-      setPriceChange(coinData?.market_data?.price_change_percentage_1y);
+    priceChangePercentage(days, coinData);
   }, [coinData, days]);
 
   return (
