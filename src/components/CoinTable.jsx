@@ -15,7 +15,7 @@ const PageSize = 25;
 const formatter = Intl.NumberFormat("en");
 
 const CoinTable = () => {
-  const { currency, coins, fetchError } = useContext(CryptoContext);
+  const { currency, coins, fetchError, theme } = useContext(CryptoContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataCoins, setDataCoins] = useState([]);
   const [searchedDataCoins, setSearchedDataCoins] = useState([]);
@@ -55,7 +55,7 @@ const CoinTable = () => {
           >
             <input
               type="text"
-              className="w-full rounded-3xl text-sm px-4 py-2 bg-gray-800"
+              className="w-full rounded-3xl text-sm px-4 py-2 bg-gray-200 dark:bg-gray-800"
               placeholder="Search here..."
               onFocus={() => setInputFocus(true)}
               onBlur={() => setInputFocus(false)}
@@ -65,7 +65,7 @@ const CoinTable = () => {
             <button
               disabled={!inputFocus}
               className={
-                "absolute right-5 top-2 text-gray-500 " +
+                "absolute right-5 top-2 text-gray-400 dark:text-gray-500 " +
                 (inputFocus && "hover:text-white")
               }
             >
@@ -97,12 +97,12 @@ const CoinTable = () => {
                       {index + 1 + PageSize * (currentPage - 1)}
                     </td>
                     <td className="flex items-center h-16">
-                      <div className="p-3 rounded-full bg-gray-800">
+                      <div className="p-3 rounded-full bg-gray-700 dark:bg-gray-800">
                         <img src={coin.image} alt="" className="w-4 h-4" />
                       </div>
                       <div className="px-3">
                         <p className="text-sm">{coin.name}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-600 dark:text-gray-500">
                           {coin.symbol.toUpperCase()}
                         </p>
                       </div>
@@ -112,8 +112,12 @@ const CoinTable = () => {
                         data={coin.sparkline_in_7d.price}
                         color={
                           coin.price_change_percentage_24h > 0
-                            ? "rgb(20 184 166)"
-                            : "rgb(248 113 113)"
+                            ? theme === "dark"
+                              ? "rgb(20 184 166)"
+                              : "rgb(13 148 136)"
+                            : theme === "dark"
+                            ? "rgb(248 113 113)"
+                            : "rgb(239 68 68)"
                         }
                       />
                     </td>
@@ -128,8 +132,8 @@ const CoinTable = () => {
                         className={
                           "text-xs " +
                           (coin.price_change_percentage_24h > 0
-                            ? "text-teal-500"
-                            : "text-red-400")
+                            ? "text-teal-600 dark:text-teal-500"
+                            : "text-red-500 dark:text-red-400")
                         }
                       >
                         <span className="mr-1">

@@ -9,6 +9,7 @@ const CryptoProvider = ({ children }) => {
   const [coins, setCoins] = useState([]);
   const [days, setDays] = useState(1);
   const [fetchError, setFetchError] = useState(null);
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     fetchCoinList(currency, (status, data) => {
@@ -27,6 +28,8 @@ const CryptoProvider = ({ children }) => {
         setFetchError,
         days,
         setDays,
+        theme,
+        setTheme,
       }}
     >
       {children}

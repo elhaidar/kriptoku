@@ -54,7 +54,7 @@ const CoinDetails = () => {
       {!isLoading && (
         <section className="flex items-center justify-between font-heading pl-2 pr-3 py-4 w-full h-full">
           <div className="flex items-center">
-            <div className="p-3 bg-gray-800 rounded-full mr-3">
+            <div className="p-3 bg-gray-700 dark:bg-gray-800 rounded-full mr-3">
               <img src={coinData?.image?.thumb} alt="" className="w-6 h-6" />
             </div>
             <div>
@@ -67,7 +67,9 @@ const CoinDetails = () => {
           <div
             className={
               "text-right " +
-              (priceChange > 0 ? "text-teal-500" : "text-red-400")
+              (priceChange > 0
+                ? "text-teal-600 dark:text-teal-500"
+                : "text-red-500 dark:text-red-400")
             }
           >
             <p>
@@ -169,7 +171,9 @@ const CoinDetails = () => {
             </ul>
           </section>
           <section className="py-8">
-            <h3 className="text-gray-400 text-sm">Description</h3>
+            <h3 className="text-gray-700 dark:text-gray-400 text-sm">
+              Description
+            </h3>
             <p className="py-4 text-xs text-justify text-gray-500">
               {coinData?.description?.en}
             </p>

@@ -15,14 +15,14 @@ const TrendingCard = ({ data, classname }) => {
   return (
     <div
       className={
-        "p-2 carousel-card w-1/3 cursor-pointer hover:bg-gray-800 rounded-xl" +
+        "p-2 carousel-card w-1/3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800 rounded-xl" +
         classname
       }
       onClick={() => navigate(`/coin/${data?.id}`)}
     >
-      <p className="text-sm text-gray-500">{data?.name}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-500">{data?.name}</p>
       <div className="flex items-center py-1">
-        <div className="bg-gray-800 rounded-full">
+        <div className="bg-gray-700 dark:bg-gray-800 rounded-full">
           <img src={data?.image} alt="" className="w-6 h-6" />
         </div>
         <p className="px-3 font-medium">
@@ -34,8 +34,8 @@ const TrendingCard = ({ data, classname }) => {
         className={
           "text-xs py-1 pl-1 " +
           (data?.price_change_percentage_24h > 0
-            ? "text-teal-500"
-            : "text-red-400")
+            ? "text-teal-600 dark:text-teal-500"
+            : "text-red-500 dark:text-red-400")
         }
       >
         {" "}

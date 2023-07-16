@@ -9,11 +9,11 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
-
+/* 
 body {
-  @apply flex flex-col justify-center items-center bg-gray-900 text-white;
+  @apply flex flex-col justify-center items-center text-white;
   font-family: "Hind", sans-serif;
-}
+} */
 
 h1,
 h2,

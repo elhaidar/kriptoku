@@ -6,7 +6,7 @@ import { CryptoContext } from "./context/Context";
 import Loader from "./Loader";
 
 const HistoricalChart = ({ id, data }) => {
-  const { currency, days, setDays } = useContext(CryptoContext);
+  const { currency, days, setDays, theme } = useContext(CryptoContext);
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState([]);
   const [fetchError, setFetchError] = useState(false);
@@ -42,7 +42,8 @@ const HistoricalChart = ({ id, data }) => {
           onClick={() => setDays(1)}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
-            (days === 1 && "text-gray-950 bg-gray-100")
+            (days === 1 &&
+              "text-white bg-gray-700 dark:text-gray-950 dark:bg-gray-100")
           }
         >
           1d
@@ -51,7 +52,8 @@ const HistoricalChart = ({ id, data }) => {
           onClick={() => setDays(7)}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
-            (days === 7 && "text-gray-950 bg-gray-100")
+            (days === 7 &&
+              "text-white bg-gray-700 dark:text-gray-950 dark:bg-gray-100")
           }
         >
           1w
@@ -60,7 +62,8 @@ const HistoricalChart = ({ id, data }) => {
           onClick={() => setDays(14)}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
-            (days === 14 && "text-gray-950 bg-gray-100")
+            (days === 14 &&
+              "text-white bg-gray-700 dark:text-gray-950 dark:bg-gray-100")
           }
         >
           2w
@@ -69,7 +72,8 @@ const HistoricalChart = ({ id, data }) => {
           onClick={() => setDays(30)}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
-            (days === 30 && "text-gray-950 bg-gray-100")
+            (days === 30 &&
+              "text-white bg-gray-700 dark:text-gray-950 dark:bg-gray-100")
           }
         >
           1m
@@ -78,7 +82,8 @@ const HistoricalChart = ({ id, data }) => {
           onClick={() => setDays(60)}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
-            (days === 60 && "text-gray-950 bg-gray-100")
+            (days === 60 &&
+              "text-white bg-gray-700 dark:text-gray-950 dark:bg-gray-100")
           }
         >
           2m
@@ -87,7 +92,8 @@ const HistoricalChart = ({ id, data }) => {
           onClick={() => setDays(365)}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
-            (days === 365 && "text-gray-950 bg-gray-100")
+            (days === 365 &&
+              "text-white bg-gray-700 dark:text-gray-950 dark:bg-gray-100")
           }
         >
           1y
@@ -99,7 +105,15 @@ const HistoricalChart = ({ id, data }) => {
         {!isLoading && !fetchError && (
           <LineCharts
             data={chartData}
-            color={priceChange > 0 ? "rgb(20 184 166)" : "rgb(248 113 113)"}
+            color={
+              priceChange > 0
+                ? theme === "dark"
+                  ? "rgb(20 184 166)"
+                  : "rgb(13 148 136)"
+                : theme === "dark"
+                ? "rgb(248 113 113)"
+                : "rgb(239 68 68)"
+            }
             yAxis={true}
           />
         )}
