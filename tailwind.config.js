@@ -7,7 +7,12 @@ export default {
       sans: ["Hind", "sans-serif"],
       heading: ["Montserrat", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      screens: {
+        sm: "480px",
+        // => @media (min-width: 992px) { ... }
+      },
+    },
   },
   plugins: [],
 };

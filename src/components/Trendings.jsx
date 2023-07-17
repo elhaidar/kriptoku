@@ -11,6 +11,7 @@ const Trendings = () => {
   const [active, setActive] = useState(true);
   const [trendings, setTrendings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [cardCount, setCardCount] = useState(3);
   const timeoutAutoplay = useRef(null);
   const timeoutActive = useRef(null);
 
@@ -31,13 +32,13 @@ const Trendings = () => {
     timeoutAutoplay.current =
       autoplay &&
       setTimeout(() => {
-        if (current === 9) {
+        if (current === trendings.length - cardCount) {
           setCurrent(0);
         } else {
-          setCurrent(current + 3);
+          setCurrent(current + cardCount);
         }
       }, 5500);
-  }, [autoplay, current]);
+  }, [autoplay, cardCount, current, trendings]);
 
   useEffect(() => {
     timeoutActive.current = setTimeout(() => {
@@ -62,7 +63,7 @@ const Trendings = () => {
         {!isLoading &&
           trendings?.map((data, index) => {
             return (
-              index < current + 3 &&
+              index < current + cardCount &&
               index >= current && (
                 <TrendingCard
                   data={data}

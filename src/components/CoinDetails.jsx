@@ -174,7 +174,7 @@ const CoinDetails = () => {
             <h3 className="text-gray-700 dark:text-gray-400 text-sm">
               Description
             </h3>
-            <p className="py-4 text-xs text-justify text-gray-500">
+            <p className="py-4 break-words text-xs text-justify text-gray-500">
               {coinData?.description?.en}
             </p>
           </section>
