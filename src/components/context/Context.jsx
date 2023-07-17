@@ -9,7 +9,9 @@ const CryptoProvider = ({ children }) => {
   const [coins, setCoins] = useState([]);
   const [days, setDays] = useState(1);
   const [fetchError, setFetchError] = useState(null);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(
+    (localStorage.theme && localStorage.getItem("theme")) || "dark"
+  );
 
   useEffect(() => {
     fetchCoinList(currency, (status, data) => {
