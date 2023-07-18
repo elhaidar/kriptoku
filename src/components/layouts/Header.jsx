@@ -46,7 +46,7 @@ const Header = () => {
     <header className="w-full px-8 pt-4">
       <ul className="flex justify-between items-center border-b-[1px] border-gray-700 pb-4">
         {location.pathname === "/" ? (
-          <li className="text-gray-600 dark:text-teal-600 font-heading font-bold text-lg cursor-default">
+          <li className="text-gray-600 dark:text-teal-500 font-heading font-bold text-lg cursor-default">
             Kripto<span className="text-sm opacity-90">ku</span>
           </li>
         ) : (
