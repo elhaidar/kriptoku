@@ -1,17 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { CryptoContext } from "./context/Context";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchSingleCoin } from "../config/api";
 import HistoricalChart from "./HistoricalChart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import Loader from "./Loader";
+import { useSelector, useDispatch } from "react-redux";
+import { setFetchError } from "./redux/coinsSlice";
 
 const CoinDetails = () => {
   const formatter = Intl.NumberFormat("en");
   const formatterCompact = Intl.NumberFormat("en", { notation: "compact" });
-
-  const { currency, days, setFetchError } = useContext(CryptoContext);
+  const dispatch = useDispatch();
+  const currency = useSelector((state) => state.coins.currency);
+  const days = useSelector((state) => state.coins.chartDays);
   const { id } = useParams();
   const [coinData, setCoinData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -38,11 +40,11 @@ const CoinDetails = () => {
       if (status) {
         setCoinData(data);
       } else {
-        setFetchError(data);
+        dispatch(setFetchError(data));
       }
     });
     setIsLoading(false);
-  }, [id, setFetchError]);
+  }, [dispatch, id]);
 
   useEffect(() => {
     priceChangePercentage(days, coinData);

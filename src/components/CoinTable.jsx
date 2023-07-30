@@ -5,17 +5,20 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import LineCharts from "./LineCharts";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { CryptoContext } from "./context/Context";
+import { useEffect, useMemo, useState } from "react";
 import Loader from "./Loader";
 import Pagination from "./Pagination";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PageSize = 25;
 const formatter = Intl.NumberFormat("en");
 
 const CoinTable = () => {
-  const { currency, coins, fetchError, theme } = useContext(CryptoContext);
+  const currency = useSelector((state) => state.coins.currency);
+  const coins = useSelector((state) => state.coins.coins);
+  const fetchError = useSelector((state) => state.coins.fetchError);
+  const theme = useSelector((state) => state.theme.mode);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataCoins, setDataCoins] = useState([]);
   const [searchedDataCoins, setSearchedDataCoins] = useState([]);

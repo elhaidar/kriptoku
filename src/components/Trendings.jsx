@@ -1,19 +1,20 @@
 import TrendingCard from "./TrendingCard";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { CryptoContext } from "./context/Context";
 import Loader from "./Loader";
+import { useSelector } from "react-redux";
 
 const Trendings = () => {
-  const { currency, coins } = useContext(CryptoContext);
+  const currency = useSelector((state) => state.coins.currency);
+  const coins = useSelector((state) => state.coins.coins);
   const [current, setCurrent] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const [active, setActive] = useState(true);
   const [trendings, setTrendings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [cardCount, setCardCount] = useState(3);
   const timeoutAutoplay = useRef(null);
   const timeoutActive = useRef(null);
+  const cardCount = 3;
 
   useEffect(() => {
     setIsLoading(true);

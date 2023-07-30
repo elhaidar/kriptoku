@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LineCharts from "./LineCharts";
 import { fetchMarketCharts } from "../config/api";
-import { CryptoContext } from "./context/Context";
 import Loader from "./Loader";
+import { useSelector, useDispatch } from "react-redux";
+import { setChartDays } from "./redux/coinsSlice";
 
 const HistoricalChart = ({ id, data }) => {
-  const { currency, days, setDays, theme } = useContext(CryptoContext);
+  const dispatch = useDispatch();
+  const currency = useSelector((state) => state.coins.currency);
+  const days = useSelector((state) => state.coins.chartDays);
+  const theme = useSelector((state) => state.theme.mode);
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState([]);
   const [fetchError, setFetchError] = useState(false);
@@ -39,7 +43,7 @@ const HistoricalChart = ({ id, data }) => {
     <section>
       <ul className="flex items-center justify-around pt-8 pb-4">
         <li
-          onClick={() => setDays(1)}
+          onClick={() => dispatch(setChartDays(1))}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
             (days === 1 &&
@@ -49,7 +53,7 @@ const HistoricalChart = ({ id, data }) => {
           1d
         </li>
         <li
-          onClick={() => setDays(7)}
+          onClick={() => dispatch(setChartDays(7))}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
             (days === 7 &&
@@ -59,7 +63,7 @@ const HistoricalChart = ({ id, data }) => {
           1w
         </li>
         <li
-          onClick={() => setDays(14)}
+          onClick={() => dispatch(setChartDays(14))}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
             (days === 14 &&
@@ -69,7 +73,7 @@ const HistoricalChart = ({ id, data }) => {
           2w
         </li>
         <li
-          onClick={() => setDays(30)}
+          onClick={() => dispatch(setChartDays(30))}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
             (days === 30 &&
@@ -79,7 +83,7 @@ const HistoricalChart = ({ id, data }) => {
           1m
         </li>
         <li
-          onClick={() => setDays(60)}
+          onClick={() => dispatch(setChartDays(60))}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
             (days === 60 &&
@@ -89,7 +93,7 @@ const HistoricalChart = ({ id, data }) => {
           2m
         </li>
         <li
-          onClick={() => setDays(365)}
+          onClick={() => dispatch(setChartDays(365))}
           className={
             "py-1 px-2 rounded-xl cursor-pointer " +
             (days === 365 &&

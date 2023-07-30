@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { CryptoContext } from "../context/Context";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -8,6 +7,9 @@ import {
   faMoon,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setChartDays, setCurrency, setFetchError } from "../redux/coinsSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme } from "../redux/themeSlice";
 
 const sunIcon = (
   <svg
@@ -27,11 +29,12 @@ const sunIcon = (
 );
 
 const Header = () => {
-  const { currency, setCurrency, setFetchError, setDays, theme, setTheme } =
-    useContext(CryptoContext);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currency = useSelector((state) => state.coins.currency);
+  const theme = useSelector((state) => state.theme.mode);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -54,8 +57,8 @@ const Header = () => {
             <FontAwesomeIcon
               icon={faArrowLeft}
               onClick={() => {
-                setFetchError(null);
-                setDays(1);
+                dispatch(setFetchError(null));
+                dispatch(setChartDays(1));
                 navigate("/");
               }}
               className="cursor-pointer px-3"
@@ -68,14 +71,14 @@ const Header = () => {
               {theme === "dark" ? (
                 <button
                   className="flex items-center"
-                  onClick={() => setTheme("light")}
+                  onClick={() => dispatch(setTheme("light"))}
                 >
                   {sunIcon}
                 </button>
               ) : (
                 <button
                   className="flex items-center"
-                  onClick={() => setTheme("dark")}
+                  onClick={() => dispatch(setTheme("dark"))}
                 >
                   <FontAwesomeIcon icon={faMoon} className="w-4 h-full" />
                 </button>
@@ -86,7 +89,7 @@ const Header = () => {
                 className="flex justify-center py-1 px-8 items-center bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700"
                 onClick={() => setIsOpen((prev) => !prev)}
               >
-                {currency.toUpperCase()}{" "}
+                {currency?.toUpperCase()}{" "}
                 <FontAwesomeIcon
                   icon={isOpen ? faCaretUp : faCaretDown}
                   className="absolute right-2 pb-1 w-2"
@@ -101,7 +104,7 @@ const Header = () => {
                 <li
                   className="w-full text-center cursor-pointer py-1 hover:bg-gray-300 dark:hover:bg-gray-700"
                   onClick={() => {
-                    setCurrency("usd");
+                    dispatch(setCurrency("usd"));
                     setIsOpen(false);
                   }}
                 >
@@ -110,7 +113,7 @@ const Header = () => {
                 <li
                   className="w-full text-center cursor-pointer py-1 hover:bg-gray-300 dark:hover:bg-gray-700"
                   onClick={() => {
-                    setCurrency("idr");
+                    dispatch(setCurrency("idr"));
                     setIsOpen(false);
                   }}
                 >

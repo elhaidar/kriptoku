@@ -4,13 +4,12 @@ import {
   faArrowTrendUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
-import { CryptoContext } from "./context/Context";
 import { useNavigate } from "react-router-dom";
 import useWindowDimensions from "./hooks/useWindowDimension";
+import { useSelector } from "react-redux";
 
 const TrendingCard = ({ data, classname }) => {
-  const { currency } = useContext(CryptoContext);
+  const currency = useSelector((state) => state.coins.currency);
   const compactFormatter = Intl.NumberFormat("en", { notation: "compact" });
   const formatter = Intl.NumberFormat("en");
   const navigate = useNavigate();
