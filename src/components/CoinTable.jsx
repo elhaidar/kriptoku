@@ -36,7 +36,11 @@ const CoinTable = () => {
     !search && setSearchedDataCoins(dataCoins);
     search &&
       setSearchedDataCoins(
-        dataCoins.filter((coin) => coin.name.toLowerCase().includes(search))
+        dataCoins.filter(
+          (coin) =>
+            coin.name.toLowerCase().includes(search.toLowerCase()) ||
+            coin.symbol.toLowerCase().includes(search.toLowerCase())
+        )
       );
   }, [dataCoins, search]);
 
@@ -63,7 +67,7 @@ const CoinTable = () => {
               onFocus={() => setInputFocus(true)}
               onBlur={() => setInputFocus(false)}
               value={search}
-              onChange={(e) => setSearch(e.target.value.toLowerCase())}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <button
               disabled={!inputFocus}
